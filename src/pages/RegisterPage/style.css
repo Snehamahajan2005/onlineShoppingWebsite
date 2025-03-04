@@ -99,7 +99,7 @@
   }
   
   .register-image img {
-    width: 100%; /* Make the image responsive 
-    height: auto; /* Maintain aspect ratio */
+    width: 100%; 
+    height: auto; 
   }
   
