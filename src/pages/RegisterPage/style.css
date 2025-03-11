@@ -4,102 +4,91 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-color: #e6f0ff;
+    background:linear-gradient( to right, var(--baseColor),var(--secondaryColor));
   }
   
   /* Box */
   .register-box {
     display: flex;
-    width: 800px;
-    background: white;
+    width: 50%;
+    background: var(--whiteColor);
     border-radius: 12px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
+    box-shadow: 0px 0px 10px var(--blackColor);
   }
   
   /* Form Section */
   .register-form {
+    flex:1;
     width: 50%;
     padding: 30px;
-    display: flex;
+    display:flex;
     flex-direction: column;
+  
+
   }
   
   .register-form h2 {
-    font-size: 24px;
-    color: #333;
+    font-size: 32px;
+    color: var(--blackColor);
     text-align: center;
     margin-bottom: 5px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   }
   
   .register-form p {
-    font-size: 14px;
-    color: gray;
+    font-size: 24px;
+    color: var(--greyColorDim);
     text-align: center;
     margin-bottom: 20px;
   }
   
   .register-form label {
     font-weight: bold;
-    font-size: 14px;
-    color: #333;
+    font-size: 18px;
+    color: var(--inputColor);
     margin-bottom: 5px;
+    text-align: left;
     display: block;
+  
   }
   
   .register-form span {
-    color: red;
+    color:var(--redColor);
   }
   
   /* Inputs */
   .register-form input {
     width: 100%;
+    padding:5px 8px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-size: 14px
+  }
+  
+.RegisterPageButtonContainer{
+  
+
     padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
-  }
-  
-  .register-button {
-    width: 100%;
-    padding: 12px;
-    background-color: #007bff;
-    color: white;
-    font-size: 16px;
-    border: none;
+    font-size: 24px;
+    font-weight: bold;
     border-radius: 5px;
     cursor: pointer;
-    transition: 0.3s;
-  }
-  
-  .register-button:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Sign In */
-  .signin-text {
-    text-align: center;
-    margin-top: 10px;
-    font-size: 14px;
-  }
-  
-  .signin-text span {
-    color: #007bff;
-    cursor: pointer;
-  }
-  
+    margin-top:10px;
+}
+
+
   /* Image Section */
   .register-image {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    flex: 1;
     width: 100%; /* Adjust according to the container */
-    height: 100%;
+    height:100%;
+    margin:10px;
   }
   
   .register-image img {
-    width: 100%; 
-    height: auto; 
+  
+      width: 100%;  
+      height: 500px; 
+    
   }
   

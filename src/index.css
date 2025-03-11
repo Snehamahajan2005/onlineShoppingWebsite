@@ -1,10 +1,16 @@
 :root{
-  --baseColor:#0693e3 ;
-  --secondaryColor:#9b51e0 ;
+  --baseColor:#ca7df9;
+  --baseColorDark:#6200ea;
+  --secondaryColor:#ffafcc;
   --whiteColor:#ffffff;
   --blackColor:#000000;
   --greyColor:#292929;
+  --greyColorDim:#292929cc;
   --borderColor:#dadada;
+  --inputColor:#333;
+  --redColor:red;
+  
+
 }
 body {
   margin: 0;

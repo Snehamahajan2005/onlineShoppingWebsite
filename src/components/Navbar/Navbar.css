@@ -1,0 +1,78 @@
+/* src/components/Navbar.css */
+.navbar {
+   background:linear-gradient(to top, var(--baseColor),var(--secondaryColor)) ;
+    color: var(--whiteColor);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+  }
+  .navbarheading{
+    display: flex;
+    flex-direction: row;
+    gap:5px;
+  }
+  .navbarlogo{
+    flex:1
+  }
+.navbarlogo img{
+  width:40px;
+  height:40px;
+  mix-blend-mode:color-burn;
+}
+.navbarname {
+  flex:1;
+}
+  .navbarname h2 {
+    margin: 0;
+  }
+  
+  
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+  }
+  
+  .nav-links li {
+    display: inline;
+  }
+  
+  .nav-links a {
+    text-decoration: none;
+    color: var(--whiteColor);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: bold;
+  }
+  
+  .nav-links a:hover {
+    color: var(--blackColor);
+  }
+  .search-bar {
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-bar input {
+    padding: 0.5rem;
+    margin-right: 0.2rem;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+  }
+  
+  .search-bar button {
+    background-color:var(--whiteColor);
+    color:var(--baseColorDark);
+    border: none;
+    border-radius: 5px;
+    padding: 0.4rem 0.6rem;
+    cursor: pointer;
+  }
+  
+  .search-bar button:hover {
+    background-color: var(--baseColor);
+    color: var(--whiteColor);
+  }

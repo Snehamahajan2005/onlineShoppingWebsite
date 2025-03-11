@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./style.css";
 import { FaEyeSlash } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
-function CustomInput({type,placeholder,Icon,iconColor,isSecureEntry=false,inputValue,onChangeText})
+function CustomInput({type,placeholder,Icon,iconColor,isSecureEntry=false,inputValue,onChangeText,required})
 {
     const [showText,setShowText]=useState(false);
     return(
@@ -12,10 +12,11 @@ function CustomInput({type,placeholder,Icon,iconColor,isSecureEntry=false,inputV
             </div>
             <div className="customInputInputContainer">
             <input value={inputValue} type={isSecureEntry ? (showText?"text" : "password"):type} placeholder={placeholder}
-            onChange={onChangeText}/>
+            onChange={onChangeText}
+            required={required}/>
             </div>
             {isSecureEntry && (
-                 <div className="customInputpasswodContainer" onClick={()=>{
+                 <div className="customInputpasswordContainer" onClick={()=>{
                     setShowText(!showText);
                  }}>
                     {showText ?<FaEye />:<FaEyeSlash/>}

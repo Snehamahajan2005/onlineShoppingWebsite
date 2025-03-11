@@ -1,7 +1,7 @@
 .customInputBaseContainer{
     padding: 10px;
     border-radius: 10px;
-    border:1px solid var(--borderColor);
+    border:1px solid var(--secondaryColor);
     display: flex;
     gap: 5px;
     
@@ -18,9 +18,5 @@
 }
 .customInputInputContainer input:focus{
     outline: none;
-
-}
-.customInputpasswodContainer{
-
-}
     
+}
