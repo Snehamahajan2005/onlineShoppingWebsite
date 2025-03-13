@@ -5,15 +5,61 @@ import COLOR from "../../config/color";
 import CustomButton from "../../components/CustomButton/CustomButton";
 import CustomInput from "../../components/CustomInput/CustomInput";
 import { FaUserAlt, FaKey } from "react-icons/fa";
-import {auth} from "../../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth, database } from "../../firebase";
+import { useNavigate } from "react-router-dom";
+import { ref, set } from "firebase/database";
 
 function RegisterPage() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const[password,setPassword]=useState("");
-  const handleRegister=async() => {
-    await createUserWithEmailAndPassword(auth,email,password);
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [buttonText, setButtonText] = useState("Register");
+  const navigate = useNavigate();
+
+  const saveUserDetails = (data) => {
+    set(ref(database, `users/${data.uid}`), data);
+    navigate("/LoginPage");
+  };
+
+  const handleRegister = async () => {
+    try {
+      if (name == "" || email == "" || password == "" || confirmPassword == "" ) {
+        alert("Please fill the fields");
+      } else if (password != confirmPassword) {
+        alert("Password is not matched");
+      } else {
+        setButtonText("Please Wait...");
+        const response = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          confirmPassword
+        );
+        setButtonText("Register");
+        if (response.user.uid) {
+          const userData = {
+            uid: response.user.uid,
+            email: response.user.email,
+            name: name,
+          };
+          saveUserDetails(userData);
+        } else {
+          alert("Failed to register");
+          setEmail("");
+          setPassword("");
+          setConfirmPassword("");
+          setName("");
+        }
+      }
+    } catch (err) {
+      setButtonText("Register");
+      setEmail("");
+      setPassword("");
+      setConfirmPassword("");
+      setName("");
+      alert(err);
+    }
   };
   return (
     <div className="register-container">
@@ -60,13 +106,15 @@ function RegisterPage() {
               type={"password"}
               placeholder={"Re-enter your password"}
               Icon={FaKey}
+              inputValue={confirmPassword}
+              onChangeText={(e) => setConfirmPassword(e.target.value)}
               isSecureEntry={true}
-              required
+              required={true}
             />
           
                   <div  className="RegisterPageButtonContainer">
                      <CustomButton 
-                     backgroundColor={COLOR.baseColor} color={COLOR.whiteColor} title={"Create Account"} onClick={handleRegister}/>
+                     backgroundColor={COLOR.baseColor} color={COLOR.whiteColor} title={"Register"} onClick={handleRegister}/>
                     </div>
         </div>
         {/* Right - Image Section */}
