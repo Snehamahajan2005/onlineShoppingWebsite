@@ -9,17 +9,19 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, database } from "../../firebase";
 import { useNavigate } from "react-router-dom";
 import { ref, set } from "firebase/database";
+import logo from "../../assests/images/logo.jpg";
 
 function RegisterPage() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
-  const[password,setPassword]=useState("");
+  const [password,setPassword]=useState("");
+  const [userType,setUserType]=useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [buttonText, setButtonText] = useState("Register");
+  const [buttonText, setButtonText] =useState("Register");
   const navigate = useNavigate();
 
   const saveUserDetails = (data) => {
-    set(ref(database, `users/${data.uid}`), data);
+    set(ref(database, `users/${userType}/${data.uid}`), data);
     navigate("/LoginPage");
   };
 
@@ -42,6 +44,7 @@ function RegisterPage() {
             uid: response.user.uid,
             email: response.user.email,
             name: name,
+            password:response.user.password,
           };
           saveUserDetails(userData);
         } else {
@@ -50,16 +53,18 @@ function RegisterPage() {
           setPassword("");
           setConfirmPassword("");
           setName("");
-        }
+          setUserType("");
       }
-    } catch (err) {
+    }
+   } catch (err) {
       setButtonText("Register");
       setEmail("");
       setPassword("");
-      setConfirmPassword("");
+      setConfirmPassword(""); 
       setName("");
       alert(err);
-    }
+      setUserType("");
+     }
   };
   return (
     <div className="register-container">
@@ -67,9 +72,13 @@ function RegisterPage() {
         
         {/* Left - Form Section */}
         <div className="register-form">
-          <h2>Create an Account</h2>
-           <p>Register Here!</p>
-
+        <div className="RegisterPageHeadingContainer">
+        <img src={logo} alt="logo" className="RegisterPageLogoContainer" />
+        <h1 ><span style={{color:COLOR.secondaryColor}}>S</span>tyle<span style={{color:COLOR.baseColor}}>W</span>ish
+        </h1>
+        </div>
+        <p>Register Here!</p>
+        
           
             <label>Full Name <span>*</span></label>
             <CustomInput
@@ -99,6 +108,7 @@ function RegisterPage() {
               onChangeText={(e)=>setPassword(e.target.value)}
               isSecureEntry={true}
               required={true}
+              maxLength={8}
             />
 
             <label>Confirm Password <span>*</span></label>
@@ -110,12 +120,21 @@ function RegisterPage() {
               onChangeText={(e) => setConfirmPassword(e.target.value)}
               isSecureEntry={true}
               required={true}
+              maxLength={8}
             />
+            <select value={userType} onChange={(e)=>setUserType(e.target.value)} className="role-select">
+                    <option value="">Register As</option>
+                    <option value="Admin">Admin</option>
+                    <option value="Customer">Customer</option>
+            </select>
           
           <div  className="RegisterPageButtonContainer">
                      <CustomButton 
-                     backgroundColor={COLOR.baseColor} color={COLOR.whiteColor} title={"Register"} onClick={handleRegister}/>
+                     backgroundColor={COLOR.baseColor} color={COLOR.whiteColor} title={buttonText} onClick={handleRegister}/>
                     </div>
+                    
+          {/* <p>Have any account?</p><button onClick={handleRegister}>Login </button> */}
+
         </div>
         {/* Right - Image Section */}
         <div className="register-image">

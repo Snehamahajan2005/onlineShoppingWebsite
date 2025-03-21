@@ -8,12 +8,67 @@ import COLOR from "../../config/color";
 import CustomButton from "../../components/CustomButton/CustomButton";
 import { motion } from 'framer-motion';
 import ToggleSwitch from '../../components/ToggleSwitch/ToggleSwitch';
-
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth, database } from "../../firebase";
+import { useNavigate } from "react-router-dom";
+import { ref, set } from "firebase/database";
+import ErrorMessage from '../../components/errormessage/ErrorMessage';
 
 function LoginPage() {
-    const [email, setEmail] = useState("@gmail.com");
+    const [email, setEmail] = useState("");
+    const [password,setPassword]=useState("");
+    const [buttonText, setButtonText] =useState("Login");
+    const [userType,setUserType]=useState("");
     const [isDarkMode, setIsDarkMode] = useState(false);
     const toggleDarkMode = () => setIsDarkMode(!isDarkMode);
+    const [error, setError] = useState('');
+    const navigate = useNavigate();
+    
+    
+    const saveUserDetails = (data) => {
+        set(ref(database, `users/${userType}/${data.uid}`), data);
+        navigate("/");
+      };
+    
+      const handleLogin = async () => {
+        try {
+          if (email == "" || password == "" ) {
+            setError("Please fill the fields"); // Show error message
+            setTimeout(() => setError(""), 2000);
+        return;
+    }
+            setButtonText("Please Wait...");
+            const response = await signInWithEmailAndPassword(
+              auth,
+              email,
+              password
+            );
+            setButtonText("Login");
+            if (response.user.uid) {
+              const userData = {
+                uid: response.user.uid,
+                email: response.user.email,
+        
+              };
+              saveUserDetails(userData);
+            } else {
+              setError("Failed to Login"); // Show error message
+              setTimeout(() => setError(""), 2000); // Auto-clear after 2 seconds
+              setEmail("");
+              setPassword("");
+              setUserType("");
+            }
+          
+        } catch (err) {
+          setButtonText("Login");
+          setEmail("");
+          setPassword("");
+          setError("Login failed. Please try again."); // Show error message
+          setTimeout(() => setError(""), 2000); // Auto-clear after 2 seconds
+          setUserType("");
+          console.error(err); // Log the error to see what went wrong
+        }
+      };
 
     return (
         <div className={`loginPageBaseContainer ${isDarkMode ? 'dark-mode' : 'light'}`}>
@@ -44,6 +99,7 @@ function LoginPage() {
                 
                     <p className="loginPageTitleContainer">Log In Here!</p>
                     <h4 className="loginPageWelcomeContainer">{`Welcome ${email}`}</h4>
+                    <ErrorMessage message={error} />
                  
                 
                  
@@ -61,22 +117,27 @@ function LoginPage() {
                         type={"password"}
                         placeholder={"Enter your password"}
                         Icon={FaKey}
+                        inputValue={password}
                         isSecureEntry={true}
                         required={true}
+                        onChangeText={(e) => setPassword(e.target.value)}
+                        maxLength={8}
                      />
-                     <select className="role-select">
-                     <option value="default">Log in As</option>
-                    <option value="admin">Admin</option>
-                    <option value="customer">Customer</option>
+                     <select value={userType} onChange={(e)=>setUserType(e.target.value)}className="role-select">
+                     <option value="">Log in As</option>
+                    <option value="Admin">Admin</option>
+                    <option value="Customer">Customer</option>
                 </select>
                 
                  </div>
 
                    <div  className="loginPageButtonContainer">
                      <CustomButton 
-                     backgroundColor={COLOR.baseColor} color={COLOR.whiteColor} title={"Log in"} onClick={() => alert(`${email} login successfully`)}/>
+                     backgroundColor={COLOR.baseColor} color={COLOR.whiteColor} title={buttonText} 
+                     onClick={handleLogin}/>
                   </div>
                 </div>  
+                {/* <p>Don't have an account?Register</p> */}
             </motion.div>  
             
             

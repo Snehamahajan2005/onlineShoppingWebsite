@@ -122,11 +122,19 @@ body {
 
 
 }
-.dark-mode .loginPageButtonContainer {
+/* .dark-mode .loginPageButtonContainer {
     background-color: #444;
     color: white;
 }
 
 .dark-mode .loginPageButtonContainer:hover{
     background-color: #666;
+} */
+.dark-mode .role-select{
+    background-color: #222;
+    color: #666;
+}
+.dark-mode .LoginPageLogoContainer img {
+  background-color: #222;
+  mix-blend-mode:color-burn;
 }
