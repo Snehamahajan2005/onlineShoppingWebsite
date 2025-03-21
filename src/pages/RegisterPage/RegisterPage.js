@@ -5,34 +5,45 @@ import COLOR from "../../config/color";
 import CustomButton from "../../components/CustomButton/CustomButton";
 import CustomInput from "../../components/CustomInput/CustomInput";
 import { FaUserAlt, FaKey } from "react-icons/fa";
-import {auth} from "../../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth, database } from "../../firebase";
 import { useNavigate } from "react-router-dom";
-
+import { ref, set } from "firebase/database";
 
 function RegisterPage() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
-  const [password,setPassword]=useState("");
+  const[password,setPassword]=useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [buttonText, setButtonText] = useState("Register");
   const navigate = useNavigate();
 
+  const saveUserDetails = (data) => {
+    set(ref(database, `users/${data.uid}`), data);
+    navigate("/LoginPage");
+  };
 
   const handleRegister = async () => {
     try {
-      if (name =="" || email == "" || password == "" || confirmPassword == "") {
+      if (name == "" || email == "" || password == "" || confirmPassword == "" ) {
         alert("Please fill the fields");
       } else if (password != confirmPassword) {
-        alert("Password  not matched");
+        alert("Password is not matched");
       } else {
         setButtonText("Please Wait...");
         const response = await createUserWithEmailAndPassword(
-          auth,password
+          auth,
+          email,
+          confirmPassword
         );
         setButtonText("Register");
         if (response.user.uid) {
-          navigate("/LoginPage");
+          const userData = {
+            uid: response.user.uid,
+            email: response.user.email,
+            name: name,
+          };
+          saveUserDetails(userData);
         } else {
           alert("Failed to register");
           setEmail("");
@@ -96,7 +107,7 @@ function RegisterPage() {
               placeholder={"Re-enter your password"}
               Icon={FaKey}
               inputValue={confirmPassword}
-              onChangeText={(e)=>setConfirmPassword(e.target.value)}
+              onChangeText={(e) => setConfirmPassword(e.target.value)}
               isSecureEntry={true}
               required={true}
             />
