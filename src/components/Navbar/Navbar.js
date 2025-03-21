@@ -1,12 +1,22 @@
 // src/components/Navbar.js
 import React ,{useState} from 'react';
-import { FaHome, FaUser, FaShoppingCart, FaSignOutAlt,FaSearch } from 'react-icons/fa';
+import { FaHome, FaUser, FaShoppingCart,FaSearch } from 'react-icons/fa';
+import { FaCircleUser } from "react-icons/fa6";
 import "./Navbar.css";
 import logo from "../../assests/images/logo.jpg";
 import COLOR from "../../config/color";
+import { useNavigate } from "react-router-dom";
 
 
-const Navbar = () => {
+function Navbar() {
+  const navigate = useNavigate();
+  const links = [
+    { title: "Home", path: "/home" , icon: "<FaHome />" },
+    { title: "About Us", path: "/about" },
+    { title: "Products", path: "/product",icon :<FaShoppingCart /> },
+    { title: "cart", path:"/cart" ,icon :<FaShoppingCart /> },
+  ];
+
   const [searchTerm, setSearchTerm] = useState('');
   // Handle search input change
   const handleSearchChange = (e) => {
@@ -21,19 +31,19 @@ const Navbar = () => {
     // You can add your search logic here
   };
   return (
-    <nav className="navbar">
-      <div className="navbarheading">
-       <div className='navbarlogo'><img src={logo} alt="logo" /></div>
-         <div className='navbarname'><h1 ><span style={{color:COLOR.baseColor}}>S</span>tyle<span style={{color:COLOR.secondaryColor}}>W</span>ish
+    <div className="navbarBaseContainer">
+      <div className="navbarHeadingContainer">
+       <div className='navbarLogoContainer'><img src={logo} alt="logo" /></div>
+         <div className='navbarNameContainer'><h1 ><span style={{color:COLOR.baseColor}}>S</span>tyle<span style={{color:COLOR.secondaryColor}}>W</span>ish
          </h1></div>
          
       </div>
-      <ul className="nav-links">
-        <li><a href="/"><FaHome /> Home</a></li>
-        <li><a href="/profile"><FaUser /> Profile</a></li>
-        <li><a href="/cart"><FaShoppingCart /> Cart</a></li>
-        <li><a href="/logout"><FaSignOutAlt /> Logout</a></li>
-      </ul>
+      <div className="NavbarLinkContainer">
+        {links.map((item) => {
+          return <p onClick={() => navigate(item.path)}>{item.title}</p>;
+        })}
+      </div>
+      <div className="NavbarSearchContainer">
       <form className="search-bar" onSubmit={handleSearchSubmit}>
         <input
           type="text"
@@ -43,8 +53,13 @@ const Navbar = () => {
         />
         <button type="submit"><FaSearch /></button>
       </form>
-    </nav>
+      </div>
+      
+      <div className="NavbarProfileContainer">
+        <FaCircleUser size={40} color={COLOR.blackColor} />
+      </div>
+    </div>
   );
-};
+}
 
 export default Navbar;

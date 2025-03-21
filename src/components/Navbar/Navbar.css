@@ -1,5 +1,5 @@
 /* src/components/Navbar.css */
-.navbar {
+.navbarBaseContainer {
    background:linear-gradient(to top, var(--baseColor),var(--secondaryColor)) ;
     color: var(--whiteColor);
     display: flex;
@@ -7,34 +7,34 @@
     align-items: center;
     padding: 1rem 2rem;
   }
-  .navbarheading{
+  .navbarHeadingContainer{
     display: flex;
     flex-direction: row;
     gap:5px;
   }
-  .navbarlogo{
+  .navbarLogoContainer{
     flex:1
   }
-.navbarlogo img{
+.navbarLogoContainer img{
   width:40px;
   height:40px;
   mix-blend-mode:color-burn;
 }
-.navbarname {
+.navbarNameContainer {
   flex:1;
 }
-  .navbarname h2 {
+  .navbarNameContainer h2 {
     margin: 0;
   }
   
   
-  .nav-links {
+  .NavbarLinkContainer{
     list-style: none;
     display: flex;
     gap: 1.5rem;
   }
   
-  .nav-links li {
+  .NavbarLinkContainer li {
     display: inline;
   }
   
@@ -75,4 +75,10 @@
   .search-bar button:hover {
     background-color: var(--baseColor);
     color: var(--whiteColor);
+  }
+  .NavbarProfileContainer{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
   }
