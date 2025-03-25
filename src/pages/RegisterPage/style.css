@@ -77,9 +77,10 @@
   }
   .role-select {
     margin-top: 10px;
-    
-    border: 3px solid var(--secondaryColor);
+    padding: 10px;
+    border: 1px solid var(--secondaryColor);
     border-radius: 10px;
+    color: var(--greyColorDim);
 }
   
 .RegisterPageButtonContainer{

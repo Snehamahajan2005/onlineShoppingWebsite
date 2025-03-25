@@ -1,13 +1,11 @@
 .customInputBaseContainer{
-    padding: 10px;
+    padding: 5px;
+    padding-bottom: 0px;
     border-radius: 10px;
     border:1px solid var(--secondaryColor);
     display: flex;
     gap: 5px;
     
-}
-.customInpuntIconContaier{
-
 }
 .customInputInputContainer{
     flex:1;

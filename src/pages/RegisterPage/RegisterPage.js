@@ -24,6 +24,10 @@ function RegisterPage() {
     set(ref(database, `users/${userType}/${data.uid}`), data);
     navigate("/LoginPage");
   };
+  const handleLogin = async (e) => {
+    navigate("/LoginPage");
+  }
+  
 
   const handleRegister = async () => {
     try {
@@ -133,7 +137,8 @@ function RegisterPage() {
                      backgroundColor={COLOR.baseColor} color={COLOR.whiteColor} title={buttonText} onClick={handleRegister}/>
                     </div>
                     
-          {/* <p>Have any account?</p><button onClick={handleRegister}>Login </button> */}
+           <p>Have any account?<span 
+          style={{color:COLOR.baseColor}} onClick={handleLogin}>Login </span> </p>
 
         </div>
         {/* Right - Image Section */}
