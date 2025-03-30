@@ -20,6 +20,10 @@
   height:40px;
   mix-blend-mode:color-burn;
 }
+.navbarLogoContainer img :hover {
+    transform: translateX(10px);
+    transition: 5s ease-in-out;
+}
 .navbarNameContainer {
   flex:1;
 }
@@ -29,14 +33,25 @@
   
   
   .NavbarLinkContainer{
-    list-style: none;
-    display: flex;
-    gap: 1.5rem;
+    flex: 4;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  font-size: 20px;
+
+  }
+  .NavbarLinkContainer  p {
+    transition: 0.5s ease-in-out;
+  }
+  .NavbarLinkContainer p:hover {
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: underline;
+    color:var(--baseColorDark);
+
   }
   
-  .NavbarLinkContainer li {
-    display: inline;
-  }
+
   
   .nav-links a {
     text-decoration: none;
@@ -48,17 +63,22 @@
   }
   
   .nav-links a:hover {
-    color: var(--blackColor);
+    
   }
+  .NavbarSearchContanier{
+
+  }
+  
   .search-bar {
     display: flex;
     align-items: center;
+    gap: 10px;
   }
   
   .search-bar input {
     padding: 0.5rem;
     margin-right: 0.2rem;
-    border: none;
+    border: 1px solid #ccc;
     border-radius: 5px;
     outline: none;
   }
@@ -76,6 +96,23 @@
     background-color: var(--baseColor);
     color: var(--whiteColor);
   }
+  .search-results {
+    list-style: none;
+    padding: 0;
+    position: absolute;
+    background: var(--baseColor);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.search-results li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.search-results li:hover {
+    background: var(--whiteColor);
+    color:var(--baseColorDark)
+}
   .NavbarProfileContainer{
     flex: 1;
     display: flex;

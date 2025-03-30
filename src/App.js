@@ -7,8 +7,11 @@ import LandingPage from "./pages/HomePage/pages/LandingPage/LandingPage";
 import AboutPage from "./pages/HomePage/pages/AboutPage/AboutPage";
 import ProductPage from "./pages/HomePage/pages/ProductPage/ProductPage";
 import CartPage from "./pages/HomePage/pages/CartPage/CartPage";
+import NoPage from "./pages/noPage/NoPage";
+
 function App(){
   return(
+    
     <BrowserRouter>
     <Routes>
       <Route path="/" element={<HomePage/>}>
@@ -19,10 +22,13 @@ function App(){
       </Route>
       <Route path="/LoginPage" Component={LoginPage}/>
       <Route path="/RegisterPage" element={<RegisterPage/>}/>
+      <Route path="/*" element={<NoPage/>}/>
 
     </Routes>
   
     </BrowserRouter>
+    
+
   );
 }
 export default App;

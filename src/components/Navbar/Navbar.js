@@ -6,36 +6,56 @@ import "./Navbar.css";
 import logo from "../../assests/images/logo.jpg";
 import COLOR from "../../config/color";
 import { useNavigate } from "react-router-dom";
-
+import SearchBar from "../../components/searchBar/SearchBar";
 
 function Navbar() {
   const navigate = useNavigate();
   const links = [
     { title: "Home", path: "/home" , icon: "<FaHome />" },
+    { title: "All Products", path: "/product",icon :<FaShoppingCart /> },
+    { title: "Signup", path: "/RegisterPage" },
+    { title: "Login", path: "/LoginPage" },
+    { title: "Cart(0)", path:"/cart" ,icon :<FaShoppingCart /> },
     { title: "About Us", path: "/about" },
-    { title: "Products", path: "/product",icon :<FaShoppingCart /> },
-    { title: "cart", path:"/cart" ,icon :<FaShoppingCart /> },
   ];
 
   const [searchTerm, setSearchTerm] = useState('');
+  const [filteredResults, setFilteredResults] = useState([]);
   // Handle search input change
+
+  const items = [
+    { id: 1, title: "Home", path: "/" },
+    { id: 2, title: "All Products", path: "/product" },
+    { id: 3, title: "Cart", path: "/cart" },
+    { id: 4, title: "About Us", path: "/about" },
+    { id:5, title: "Signup", path: "/RegisterPage" },
+    { id:6, title: "Login", path: "/LoginPage" },
+  
+  ];
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
-    console.log("Search Term:", e.target.value); // You can use this to filter your data
+   // You can use this to filter your data
   };
-
-  // Handle form submission (if needed)
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    alert(`Searching for: ${searchTerm}`);
-    // You can add your search logic here
-  };
+    
+    // Filter items based on searchTerm
+    const results = items.filter((item) =>
+        item.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    setFilteredResults(results);
+};
+
   return (
     <div className="navbarBaseContainer">
       <div className="navbarHeadingContainer">
-       <div className='navbarLogoContainer'><img src={logo} alt="logo" /></div>
-         <div className='navbarNameContainer'><h1 ><span style={{color:COLOR.baseColor}}>S</span>tyle<span style={{color:COLOR.secondaryColor}}>W</span>ish
-         </h1></div>
+       <div className='navbarLogoContainer'><img src={logo} alt="logo" />
+       
+       </div>
+        <div className='navbarNameContainer'><h1 ><span style={{color:COLOR.baseColor}}>S</span>tyle<span style={{color:COLOR.secondaryColor}}>W</span>ish
+         </h1>
+        </div>
          
       </div>
       <div className="NavbarLinkContainer">
@@ -43,8 +63,8 @@ function Navbar() {
           return <p onClick={() => navigate(item.path)}>{item.title}</p>;
         })}
       </div>
-      <div className="NavbarSearchContainer">
-      <form className="search-bar" onSubmit={handleSearchSubmit}>
+      <div className="NavbarSearchContanier">
+       <form className="search-bar" onSubmit={handleSearchSubmit}>
         <input
           type="text"
           placeholder="Search..."
@@ -52,13 +72,27 @@ function Navbar() {
           onChange={handleSearchChange}
         />
         <button type="submit"><FaSearch /></button>
-      </form>
+       </form>
+       {filteredResults.length > 0 && (
+                    <ul className="search-results">
+                        {filteredResults.map((item) => (
+                            <li key={item.id} onClick={() => navigate(item.path)}>
+                                {item.title}
+                            </li>
+                        ))}
+                    </ul>
+                )}
       </div>
       
       <div className="NavbarProfileContainer">
-        <FaCircleUser size={40} color={COLOR.blackColor} />
+        <FaCircleUser size={40} color={COLOR.whiteColor} />
       </div>
+      <div>
+      {/* Search Bar  */}
+     <SearchBar />
     </div>
+    </div>
+    
   );
 }
 

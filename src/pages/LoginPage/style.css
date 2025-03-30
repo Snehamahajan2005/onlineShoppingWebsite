@@ -72,6 +72,18 @@ body {
 
     
 }
+.LoginPageinputContainer label {
+    font-weight: bold;
+    font-size: 18px;
+    color: var(--inputColor);
+}
+.LoginPageinputContainer span {
+    color:var(--redColor);
+  }
+
+.LoginPageinputContainer input{
+    padding:5px 8px;
+}
 .loginPageHeadingContainer{
     display: flex;
     margin-bottom: 10px;
@@ -110,14 +122,13 @@ body {
 .LoginPageinputContainer {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 5px;
 
 }
 
 /* Buttons */
 .loginPageButtonContainer{
   display: flex;
-  gap: 10px;
   margin-top: 20px;
 
 

@@ -29,6 +29,9 @@ function LoginPage() {
         set(ref(database, `users/${userType}/${data.uid}`), data);
         navigate("/");
       };
+      const handleRegister = async (e) => {
+        navigate("/RegisterPage");
+      }
     
       const handleLogin = async () => {
         try {
@@ -84,10 +87,10 @@ function LoginPage() {
 
                 {/* Right Side - Login Form */}
                 <div className="loginPageInputFormContainer">
-                <div className="toggle-container">
+                 <div className="toggle-container">
                     <label className="toggle-label">Dark Mode</label>
                     <ToggleSwitch isChecked={isDarkMode} onToggle={toggleDarkMode} />
-                </div>
+                 </div>
                    <div className="loginPageHeadingContainer">
 
                    
@@ -105,6 +108,7 @@ function LoginPage() {
                  
 
                  <div className="LoginPageinputContainer">
+                 <label>Email <span>*</span></label>
                      <CustomInput
                         type={"email"}
                         placeholder={"Enter your email"}
@@ -113,6 +117,7 @@ function LoginPage() {
                         onChangeText={(e) => setEmail(e.target.value)}
                         required={true}
                      />
+                     <label>Password <span>*</span></label>
                      <CustomInput
                         type={"password"}
                         placeholder={"Enter your password"}
@@ -127,7 +132,7 @@ function LoginPage() {
                      <option value="">Log in As</option>
                     <option value="Admin">Admin</option>
                     <option value="Customer">Customer</option>
-                </select>
+                 </select>
                 
                  </div>
 
@@ -136,8 +141,12 @@ function LoginPage() {
                      backgroundColor={COLOR.baseColor} color={COLOR.whiteColor} title={buttonText} 
                      onClick={handleLogin}/>
                   </div>
+                  <p>Don't have an account?<span 
+          style={{color:COLOR.baseColor}} onClick={handleRegister}>Register </span> </p>
+
                 </div>  
-                {/* <p>Don't have an account?Register</p> */}
+                
+               
             </motion.div>  
             
             

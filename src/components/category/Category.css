@@ -1,0 +1,64 @@
+/* Container for the entire category section */
+.category-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* Scrollable list container */
+  .category-list {
+    display: flex;
+    overflow-x: auto; /* Enables horizontal scrolling */
+    white-space: nowrap; /* Prevents items from wrapping */
+    padding: 10px;
+    gap: 20px; /* Adds spacing between items */
+    max-width: 100%; /* Ensures it doesn't overflow */
+  }
+  
+  /* Hide scrollbar */
+  .category-list::-webkit-scrollbar {
+    display: none;
+  }
+  .category-list {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  /* Individual category item */
+  .category-item {
+    text-align: center;
+    min-width: 100px; /* Ensures each item has enough width */
+    cursor: pointer;
+  }
+  
+  /* Circular background for category images */
+  .category-image-wrapper {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: #f472b6; /* Pink background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+  }
+  
+  .category-image-wrapper:hover {
+    background-color: #ec4899; /* Lighter pink on hover */
+  }
+  
+  /* Category images */
+  .category-image {
+    width: 50px;
+    height: 50px;
+  }
+  
+  /* Category name styling */
+  .category-name {
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 8px;
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+  
