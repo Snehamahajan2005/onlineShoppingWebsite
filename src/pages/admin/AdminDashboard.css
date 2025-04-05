@@ -82,3 +82,97 @@
     color: #d81b60;
     font-weight: bold;
 }
+.dashboard-container {
+    padding: 20px;
+  }
+  
+  .top-section {
+    margin-bottom: 20px;
+    background-color: #ffe4e6;
+    padding: 20px;
+    border: 1px solid #ffeef0;
+    border-radius: 10px;
+    text-align: center;
+  }
+  
+  .dashboard-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ec4899;
+  }
+  
+  .profile-card {
+    background-color: #ffe4e6;
+    border: 1px solid #ffeef0;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .profile-image img {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .profile-info {
+    margin-top: 10px;
+    color: #ec4899;
+  }
+  
+  .label {
+    font-weight: bold;
+  }
+  
+  .tabs-section {
+    margin-top: 20px;
+  }
+  
+  .tab-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .tab-item {
+    width: 100%;
+    max-width: 250px;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .tab-card {
+    border: 1px solid #ffeef0;
+    background-color: #ffe4e6;
+    border-radius: 10px;
+    padding: 20px;
+    transition: background 0.3s ease;
+    text-align: center;
+  }
+  
+  .tab-card:hover {
+    background-color: #fbcfe8;
+  }
+  
+  .tab-icon {
+    color: #ec4899;
+    margin-bottom: 10px;
+  }
+  
+  .tab-number {
+    font-size: 24px;
+    color: #f472b6;
+    font-weight: 600;
+  }
+  
+  .tab-label {
+    font-weight: bold;
+    color: #ec4899;
+  }
+  
+  .tab-content {
+    margin-top: 20px;
+    font-size: 18px;
+    text-align: center;
+  }
+  

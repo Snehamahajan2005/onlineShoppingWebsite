@@ -1,0 +1,65 @@
+/* Main container for the OrderDetail component */
+.order-container {
+    padding: 20px;
+  }
+  
+  /* Header section */
+  .order-header {
+    padding-bottom: 20px;
+  }
+  
+  /* Title style */
+  .order-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #f472b6; /* pink-300 */
+  }
+  
+  /* Wrapper to make table scrollable horizontally on small screens */
+  .table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+  }
+  
+  /* Base table styles */
+  .order-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #ec4899; /* pink-400 */
+  }
+  
+  /* Table header cells */
+  .table-head {
+    background-color: #f1f5f9; /* slate-100 */
+    color: #334155; /* slate-700 */
+    font-weight: bold;
+    padding: 12px 16px;
+    border: 1px solid #ffeef0; /* pink-100 */
+    text-align: left;
+  }
+  
+  /* Table body cells */
+  .table-data {
+    padding: 12px 16px;
+    border: 1px solid #ffeef0;
+    color: #64748b; /* slate-500 */
+    text-transform: capitalize;
+  }
+  
+  /* Action buttons */
+  .table-action {
+    padding: 12px 16px;
+    border: 1px solid #ffeef0;
+    cursor: pointer;
+  }
+  
+  /* Edit action color */
+  .edit {
+    color: #22c55e; /* green-500 */
+  }
+  
+  /* Delete action color */
+  .delete {
+    color: #ef4444; /* red-500 */
+  }
+  
