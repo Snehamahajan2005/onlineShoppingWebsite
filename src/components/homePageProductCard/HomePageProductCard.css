@@ -1,0 +1,79 @@
+.homepage-container {
+    margin-top: 2.5rem; /* Similar to mt-10 */
+    text-align: center;
+    padding: 0 1rem;
+  }
+  
+  .heading {
+    margin-bottom: 1.25rem; /* Similar to mb-5 */
+    font-size: 1.5rem; /* text-2xl */
+    font-weight: 600; /* font-semibold */
+  }
+  
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  .card {
+    width: 100%;
+    max-width: 300px;
+    border: 1px solid #d1d5db; /* border-gray-300 */
+    border-radius: 0.75rem; /* rounded-xl */
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* shadow-md */
+    background-color: #fff;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  
+  .card:hover {
+    transform: scale(1.02);
+  }
+  
+  .card-image {
+    width: 60%;
+    height: 250px; /* Adjust height as needed */
+    object-fit: cover;
+  }
+  
+  .card-body {
+    padding: 1rem; /* p-6 equivalent */
+  }
+  
+  .card-category {
+    font-size: 0.75rem; /* text-xs */
+    color: #9ca3af; /* text-gray-400 */
+    margin-bottom: 0.25rem; /* mb-1 */
+  }
+  
+  .card-title {
+    font-size: 1.125rem; /* text-lg */
+    color: #1f2937; /* text-gray-900 */
+    margin-bottom: 0.75rem; /* mb-3 */
+  }
+  
+  .card-price {
+    font-size: 1.125rem;
+    color: #1f2937;
+    margin-bottom: 0.75rem;
+  }
+  
+  .card-button {
+    background-color: #ec4899; /* pink-500 */
+    color: white;
+    border: none;
+    padding: 0.5rem;
+    width: 100%;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .card-button:hover {
+    background-color: #db2777; /* pink-600 */
+  }
+  

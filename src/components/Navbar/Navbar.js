@@ -7,14 +7,17 @@ import logo from "../../assests/images/logo.jpg";
 import COLOR from "../../config/color";
 import { useNavigate } from "react-router-dom";
 import SearchBar from "../../components/searchBar/SearchBar";
+import { path } from 'framer-motion/client';
 
 function Navbar() {
   const navigate = useNavigate();
   const links = [
     { title: "Home", path: "/home" , icon: "<FaHome />" },
-    { title: "All Products", path: "/product",icon :<FaShoppingCart /> },
+    { title: "All Products", path: "/allproduct",icon :<FaShoppingCart /> },
     { title: "Signup", path: "/RegisterPage" },
     { title: "Login", path: "/LoginPage" },
+    {title :"user", path:"/user-dashboard"},
+    {title :"admin", path:"/admin-dashboard"},
     { title: "Cart(0)", path:"/cart" ,icon :<FaShoppingCart /> },
     { title: "About Us", path: "/about" },
   ];

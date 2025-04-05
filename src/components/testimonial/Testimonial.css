@@ -1,0 +1,107 @@
+/* Outer Section */
+.testimonial-section {
+    color: #4b5563; /* text-gray-600 */
+    font-family: sans-serif;
+    margin-bottom: 40px; /* similar to mb-10 */
+  }
+  
+  /* Container */
+  .testimonial-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px; /* approximates px-5 py-10 */
+  }
+  
+  /* Headings */
+  .testimonial-heading {
+    text-align: center;
+    font-size: 2rem; /* approx text-3xl */
+    font-weight: bold;
+    color: #000;
+    margin: 0 0 16px;
+  }
+  
+  .testimonial-subheading {
+    text-align: center;
+    font-size: 1.5rem; /* approx text-2xl */
+    font-weight: 600;
+    margin-bottom: 40px;
+  }
+  
+  .testimonial-highlight {
+    color: #ec4899; /* text-pink-500 */
+  }
+  
+  /* Grid for Testimonials */
+  .testimonial-grid {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -16px; /* similar to -m-4 */
+  }
+  
+  /* Each Testimonial Card */
+  .testimonial-card {
+    padding: 16px;
+    box-sizing: border-box;
+    width: 100%;
+    margin-bottom: 24px; /* for spacing on smaller screens */
+  }
+  
+  @media (min-width: 768px) {
+    .testimonial-card {
+      width: 33.33%;
+      margin-bottom: 0;
+    }
+  }
+  
+  /* Card Inner Container */
+  .testimonial-card-inner {
+    height: 100%;
+    text-align: center;
+  }
+  
+  /* Testimonial Image */
+  .testimonial-image {
+    width: 80px; /* approx w-20 */
+    height: 80px; /* approx h-20 */
+    margin-bottom: 32px; /* approx mb-8 */
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+    display: inline-block;
+    border: 2px solid #e5e7eb; /* border-gray-200 */
+    background-color: #f3f4f6; /* bg-gray-100 */
+  }
+  
+  /* Testimonial Text */
+  .testimonial-text {
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+  
+  /* Decorative Divider */
+  .testimonial-divider {
+    display: inline-block;
+    height: 4px;
+    width: 40px;
+    border-radius: 2px;
+    background-color: #ec4899; /* pink-500 */
+    margin: 24px 0 16px;
+  }
+  
+  /* Name and Role */
+  .testimonial-name {
+    color: #1f2937; /* text-gray-900 */
+    font-weight: 500;
+    font-size: 0.875rem; /* text-sm */
+    text-transform: uppercase;
+    letter-spacing: 1px; /* approximates tracking-wider */
+    margin: 0 0 8px;
+  }
+  
+  .testimonial-role {
+    color: #6b7280; /* text-gray-500 */
+    font-size: 0.875rem;
+    margin: 0;
+  }
+  

@@ -1,0 +1,183 @@
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Cart Content */
+.cart-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* Cart Title */
+.cart-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Cart Form */
+.cart-form {
+    display: flex;
+    gap: 20px;
+}
+
+/* Cart Items */
+.cart-items {
+    flex: 2;
+}
+
+.cart-list {
+    list-style: none;
+    padding: 0;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Product Image */
+.product-image {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+/* Product Info */
+.product-info {
+    flex: 1;
+    margin-left: 15px;
+}
+
+.product-name {
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+}
+
+.product-details {
+    font-size: 14px;
+    color: #777;
+}
+
+/* Pricing */
+.product-pricing {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.original-price {
+    text-decoration: line-through;
+    color: #888;
+}
+
+.discounted-price {
+    font-weight: bold;
+    color: #000;
+}
+
+.discount {
+    color: green;
+    font-weight: bold;
+}
+
+/* Quantity and Remove */
+.product-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.quantity-btn {
+    background: #ddd;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.quantity-input {
+    width: 40px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.remove-btn {
+    background: none;
+    border: none;
+    color: red;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.trash-icon {
+    font-size: 14px;
+}
+
+/* Order Summary */
+.order-summary {
+    flex: 1;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.summary-title {
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.summary-content {
+    margin-top: 10px;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    font-size: 14px;
+}
+
+.summary-total {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    padding: 10px 0;
+    border-top: 1px dashed #ddd;
+    font-size: 16px;
+}
+
+.free {
+    color: green;
+}
+
+/* Buy Now Button */
+.buy-now-btn {
+    width: 100%;
+    padding: 10px;
+    background: #e60073;
+    color: white;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+.buy-now-btn:hover {
+    background: #d40066;
+}

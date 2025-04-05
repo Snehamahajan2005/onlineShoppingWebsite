@@ -26,11 +26,19 @@
 }
 .navbarNameContainer {
   flex:1;
+  animation:animate 1.5s ease-in-out;
+}
+@keyframes animate{
+  from{
+    opacity: 0;
+    transform:translate(0,50px);
+    filter: blur(33px);
+  }
 }
   .navbarNameContainer h2 {
     margin: 0;
   }
-  
+   
   
   .NavbarLinkContainer{
     flex: 4;

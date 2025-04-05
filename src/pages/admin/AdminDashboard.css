@@ -1,0 +1,84 @@
+/* AdminDashboard.css */
+
+/* Container styling */
+.dashboard-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #fff5f7;
+}
+
+/* Header styling */
+.dashboard-header {
+    background-color: #ffebef;
+    padding: 15px;
+    text-align: center;
+    border-radius: 8px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #e91e63;
+}
+
+/* User info section */
+.user-info {
+    text-align: center;
+    margin-top: 20px;
+    background-color: #ffebef;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.user-avatar {
+    width: 80px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.user-info h2 {
+    color: #e91e63;
+    font-size: 18px;
+}
+
+.user-info span {
+    font-weight: bold;
+}
+
+/* Statistics section */
+.stats-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.stat-card {
+    background-color: #ffebef;
+    padding: 15px;
+    text-align: center;
+    border-radius: 8px;
+    width: 200px;
+    transition: background 0.3s;
+    cursor: pointer;
+}
+
+.stat-card:hover {
+    background-color: #ffc0cb;
+}
+
+.stat-icon {
+    width: 50px;
+    height: 50px;
+    fill: none;
+    stroke: #e91e63;
+    stroke-width: 2;
+}
+
+.stat-card h3 {
+    font-size: 24px;
+    color: #e91e63;
+}
+
+.stat-card p {
+    color: #d81b60;
+    font-weight: bold;
+}
