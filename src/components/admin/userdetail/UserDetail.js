@@ -1,23 +1,21 @@
 import React from 'react';
-import './ProductDetail.css';
-import {Link} from "react-router-dom";
+import './UserDetail.css';
 
-const ProductDetail = () => {
+const UserDetail = () => {
     return (
-        <div className="product-container">
-            {/* Header Section */}
-            <div className="product-header">
-                <h1 className="product-title">All Product</h1>
-                <Link to={'/addproduct'}><button className="add-button">Add Product</button></Link>
+        <div className="user-container">
+            {/* Header with title */}
+            <div className="user-header">
+                <h1 className="user-title">All User</h1>
             </div>
 
-            {/* Table Section */}
+            {/* Table wrapper */}
             <div className="table-wrapper">
-                <table className="product-table">
+                <table className="user-table">
                     <thead>
                         <tr>
                             <th className="table-head">S.No.</th>
-                            <th className="table-head">Location Name</th>
+                            <th className="table-head">User Name</th>
                             <th className="table-head">Action</th>
                             <th className="table-head">Action</th>
                         </tr>
@@ -36,4 +34,4 @@ const ProductDetail = () => {
     );
 };
 
-export default ProductDetail;
+export default UserDetail;

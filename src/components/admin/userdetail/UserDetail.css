@@ -1,0 +1,68 @@
+/* Main container */
+.user-container {
+    padding: 20px;
+  }
+  
+  /* Header section */
+  .user-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+  }
+  
+  /* Title style */
+  .user-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #f472b6; /* pink-300 */
+  }
+  
+  /* Table wrapper for horizontal scroll */
+  .table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+  }
+  
+  /* Table base */
+  .user-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #ec4899; /* pink-400 */
+  }
+  
+  /* Table headers */
+  .table-head {
+    background-color: #f1f5f9; /* slate-100 */
+    color: #334155; /* slate-700 */
+    font-weight: bold;
+    padding: 12px 16px;
+    border: 1px solid #ffeef0; /* pink-100 */
+    text-align: left;
+  }
+  
+  /* Table body data */
+  .table-data {
+    padding: 12px 16px;
+    border: 1px solid #ffeef0;
+    color: #64748b; /* slate-500 */
+    text-transform: capitalize;
+  }
+  
+  /* Action buttons */
+  .table-action {
+    padding: 12px 16px;
+    border: 1px solid #ffeef0;
+    cursor: pointer;
+  }
+  
+  /* Edit action */
+  .edit {
+    color: #22c55e; /* green-500 */
+  }
+  
+  /* Delete action */
+  .delete {
+    color: #ef4444; /* red-500 */
+  }
+  

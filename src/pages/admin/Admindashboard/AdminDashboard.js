@@ -2,8 +2,9 @@ import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import './AdminDashboard.css';
-import ProductDetail from "../../components/admin/productdetail1/ProductDetail";
-import OrderDetail from "../../components/admin/OrderDetail/OrderDetail";
+import ProductDetail from "../../../components/admin/productdetail1/ProductDetail";
+import OrderDetail from "../../../components/admin/OrderDetail/OrderDetail";
+import UserDetail from "../../../components/admin/userdetail/UserDetail";
 const AdminDashboard = () => {
     return (
         <div className="dashboard-container">
@@ -92,7 +93,7 @@ const AdminDashboard = () => {
                         <div className="tab-content"><OrderDetail/></div>
                     </TabPanel>
                     <TabPanel>
-                        <div className="tab-content">All Users</div>
+                        <div className="tab-content"><UserDetail/></div>
                     </TabPanel>
                 </Tabs>
             </div>

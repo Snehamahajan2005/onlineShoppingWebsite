@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import registerimg1 from "../../assests/images/registerimg1.jpg" ;
 import "./style.css";
 import COLOR from "../../config/color";
@@ -6,10 +6,15 @@ import CustomButton from "../../components/CustomButton/CustomButton";
 import CustomInput from "../../components/CustomInput/CustomInput";
 import { FaUserAlt, FaKey } from "react-icons/fa";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth, database } from "../../firebase";
+import { auth, database } from "../../firebase/firebase";
 import { useNavigate } from "react-router-dom";
 import { ref, set } from "firebase/database";
 import logo from "../../assests/images/logo.jpg";
+import myContext from "../../context/myContext";
+import toast from "react-hot-toast";
+
+
+import Loader from "../../components/loader/Loader";
 
 function RegisterPage() {
   const [email, setEmail] = useState("");
@@ -18,6 +23,10 @@ function RegisterPage() {
   const [userType,setUserType]=useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [buttonText, setButtonText] =useState("Register");
+  const context = useContext(myContext);
+  const {loading, setLoading } = context;
+
+
   const navigate = useNavigate();
 
   const saveUserDetails = (data) => {
@@ -32,15 +41,17 @@ function RegisterPage() {
   const handleRegister = async () => {
     try {
       if (name == "" || email == "" || password == "" || confirmPassword == "" ) {
-        alert("Please fill the fields");
+        //alert("Please fill the fields");
+        return toast.error("All fields are required");
       } else if (password != confirmPassword) {
         alert("Password is not matched");
       } else {
         setButtonText("Please Wait...");
+        setLoading(true);
         const response = await createUserWithEmailAndPassword(
           auth,
           email,
-          confirmPassword
+          password,
         );
         setButtonText("Register");
         if (response.user.uid) {
@@ -48,9 +59,21 @@ function RegisterPage() {
             uid: response.user.uid,
             email: response.user.email,
             name: name,
-            password:response.user.password,
+            password: password,
+            userType: userType,
+            date: new Date().toLocaleString(
+              "en-US",
+              {
+                  month: "short",
+                  day: "2-digit",
+                  year: "numeric",
+              }
+          )
+
           };
           saveUserDetails(userData);
+          setLoading(false);
+          toast.success("Signup Sucessfully");
         } else {
           alert("Failed to register");
           setEmail("");
@@ -58,6 +81,7 @@ function RegisterPage() {
           setConfirmPassword("");
           setName("");
           setUserType("");
+          setLoading(false);
       }
     }
    } catch (err) {
@@ -68,10 +92,12 @@ function RegisterPage() {
       setName("");
       alert(err);
       setUserType("");
+      setLoading(false);
      }
   };
   return (
     <div className="register-container">
+      {loading  && <Loader/>}
       <div className="register-box">
         
         {/* Left - Form Section */}

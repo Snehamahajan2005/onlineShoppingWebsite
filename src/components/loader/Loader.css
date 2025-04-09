@@ -1,0 +1,37 @@
+/* Loader container styles */
+.loader-container {
+    position: absolute;
+  }
+  
+  /* Spinner styles */
+  .loader-spinner {
+    width: 2rem; /* 32px */
+    height: 2rem;
+    margin-right: 0.5rem;
+    color: #fbcfe8; /* Light pink */
+    fill: #ec4899;  /* Bright pink */
+    animation: spin 1s linear infinite;
+  }
+  
+  /* Visually hidden text for screen readers */
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+  
+  /* Spin animation */
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  

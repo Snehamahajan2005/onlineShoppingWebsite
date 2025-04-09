@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext} from "react";
 import { FaUserAlt, FaKey } from "react-icons/fa";
 import CustomInput from "../../components/CustomInput/CustomInput";
 import logo from "../../assests/images/logo.jpg";
@@ -9,10 +9,13 @@ import CustomButton from "../../components/CustomButton/CustomButton";
 import { motion } from 'framer-motion';
 import ToggleSwitch from '../../components/ToggleSwitch/ToggleSwitch';
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth, database } from "../../firebase";
+import { auth, database } from "../../firebase/firebase";
 import { useNavigate } from "react-router-dom";
 import { ref, set } from "firebase/database";
 import ErrorMessage from '../../components/errormessage/ErrorMessage';
+import myContext from "../../context/myContext";
+import Loader from "../../components/loader/Loader";
+import toast from "react-hot-toast";
 
 function LoginPage() {
     const [email, setEmail] = useState("");
@@ -22,6 +25,8 @@ function LoginPage() {
     const [isDarkMode, setIsDarkMode] = useState(false);
     const toggleDarkMode = () => setIsDarkMode(!isDarkMode);
     const [error, setError] = useState('');
+    const context = useContext(myContext);
+    const {loading, setLoading } = context;
     const navigate = useNavigate();
     
     
@@ -41,6 +46,7 @@ function LoginPage() {
         return;
     }
             setButtonText("Please Wait...");
+            setLoading(true);
             const response = await signInWithEmailAndPassword(
               auth,
               email,
@@ -50,16 +56,25 @@ function LoginPage() {
             if (response.user.uid) {
               const userData = {
                 uid: response.user.uid,
-                email: response.user.email,
+                email: response.user.email
         
               };
               saveUserDetails(userData);
+              setLoading(false);
+              toast.success("Login Sucessfully");
+              if(userType === "Customer") {
+                navigate('/user-dashboard');
+            }else{
+                navigate('/admin-dashboard');
+            }
+              
             } else {
               setError("Failed to Login"); // Show error message
               setTimeout(() => setError(""), 2000); // Auto-clear after 2 seconds
               setEmail("");
               setPassword("");
               setUserType("");
+              setLoading(false);
             }
           
         } catch (err) {
@@ -70,13 +85,15 @@ function LoginPage() {
           setTimeout(() => setError(""), 2000); // Auto-clear after 2 seconds
           setUserType("");
           console.error(err); // Log the error to see what went wrong
+          setLoading(false);
         }
       };
 
     return (
         <div className={`loginPageBaseContainer ${isDarkMode ? 'dark-mode' : 'light'}`}>
-    
+          
             <motion.div 
+               
                 animate={{ y: [0, -10, 0] }}
                 transition={{ duration: 2, repeat: Infinity }}
                 className="loginPageContentContainer">
@@ -87,6 +104,7 @@ function LoginPage() {
 
                 {/* Right Side - Login Form */}
                 <div className="loginPageInputFormContainer">
+                {loading && <Loader/>}
                  <div className="toggle-container">
                     <label className="toggle-label">Dark Mode</label>
                     <ToggleSwitch isChecked={isDarkMode} onToggle={toggleDarkMode} />

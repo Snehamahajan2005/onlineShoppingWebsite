@@ -13,17 +13,22 @@ import ScrollTop from "./components/scrollTop/ScrollTop";
 import CartPage from "./pages/cart/CartPage";
 import AllProduct from "./pages/allProduct/AllProduct";
 import UserDashboard from  "./pages/user/UserDashboard";
-import AdminDashboard from "./pages/admin/AdminDashboard"
+import AdminDashboard from "./pages/admin/Admindashboard/AdminDashboard";
+import AddProductPage  from "./pages/admin/AddProductPage/AddProductPage";
+import UpdateProductPage  from "./pages/admin/UpdateProductPage/UpdateProductPage";
+import About from "./pages/About/About";
+import MyState from "./context/myState";
+import {Toaster} from "react-hot-toast";
 
 function App(){
   return(
-    
-    <BrowserRouter>
-    <ScrollTop/>
-    <Routes>
+   <MyState>
+     <BrowserRouter>
+     <ScrollTop/>
+     <Routes>
       <Route path="/" element={<HomePage/>}>
           <Route path="/home" element={<LandingPage />} />
-          <Route path="/about" element={<AboutPage />} />
+          
           
       </Route>
       <Route path="/LoginPage" Component={LoginPage}/>
@@ -34,13 +39,17 @@ function App(){
       <Route path="/allproduct" element={<AllProduct/>}/>
       <Route path="/user-dashboard" element={<UserDashboard/>}/>
       <Route path="/admin-dashboard" element={<AdminDashboard/>}/>
+      <Route path="/addproduct" element={<AddProductPage/>}/>
+      <Route path="/updateproduct" element={<UpdateProductPage/>}/>
+      <Route path="/about" element={<About/>} />
+      
       
 
-    </Routes>
-  
-    </BrowserRouter>
-    
-
+     </Routes>
+     <Toaster/>
+     </BrowserRouter>
+   
+    </MyState>
   );
 }
 export default App;
