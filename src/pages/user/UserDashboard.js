@@ -17,14 +17,26 @@ const products = [
 ];
 
 const UserDashboard = () => {
+    //user
+    const user = JSON.parse(localStorage.getItem('users'));
     return (
         <Layout>
             <div className="container">
                 {/* User Profile Section */}
                 <div className="profile-card">
                     <img src="https://cdn-icons-png.flaticon.com/128/2202/2202112.png" alt="Profile" className="profile-img" />
-                    <h1 className="profile-text"><span className="bold">Name:</span> Kamal Nayan Upadhyay</h1>
-                    <h1 className="profile-text"><span className="bold">Email:</span> test@gmail.com</h1>
+                    <h1 className="profile-text"><span className="bold">Name:</span> {user?.name}</h1>
+                    <h1 className="profile-text"><span className="bold">Email:</span> {user?.email}</h1>
+                    {/* Date  */}
+                    <h1 className="profile-text">
+                                <span className=" font-bold">Date : </span>
+                                {user?.date}
+                            </h1>
+                    {/* Role  */}
+                    <h1 className="profile-text">
+                    <span className=" font-bold">userType : </span>
+                     {user?.userType}
+                            </h1>
                 </div>
 
                 {/* Order Details Section */}

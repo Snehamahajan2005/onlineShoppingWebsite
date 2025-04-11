@@ -9,7 +9,7 @@ import Category from "../../components/category/Category";
 import HomePageProductCard from "../../components/homePageProductCard/HomePageProductCard";
 import Track from "../../components/track/Track";
 import Testimonial from "../../components/testimonial/Testimonial";
-import Loader from "../../components/loader/Loader";
+//import Loader from "../../components/loader/Loader";
 function HomePage() {
   
   return(
@@ -20,7 +20,7 @@ function HomePage() {
         <HomePageProductCard/>
         <Track/>
         <Testimonial/>
-        <Loader/>
+       
       
   </Layout>
   );

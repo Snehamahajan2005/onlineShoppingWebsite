@@ -4,7 +4,7 @@ import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import LandingPage from "./pages/HomePage/pages/LandingPage/LandingPage";
-import AboutPage from "./pages/HomePage/pages/AboutPage/AboutPage";
+//import AboutPage from "./pages/HomePage/pages/AboutPage/AboutPage";
 //import ProductPage from "./pages/HomePage/pages/ProductPage/ProductPage";
 //import CartPage from "./pages/HomePage/pages/CartPage/CartPage";
 import NoPage from "./pages/noPage/NoPage";
@@ -19,6 +19,9 @@ import UpdateProductPage  from "./pages/admin/UpdateProductPage/UpdateProductPag
 import About from "./pages/About/About";
 import MyState from "./context/myState";
 import {Toaster} from "react-hot-toast";
+import  ProtectedRouteForUser  from "./protectedRoute/ProtectedRouteForUser";
+import  ProtectedRouteForAdmin  from "./protectedRoute/ProtectedRouteForAdmin";
+
 
 function App(){
   return(
@@ -37,10 +40,26 @@ function App(){
       <Route path="/productinfo" element={<ProductInfo />} />
       <Route path="/cart" element={<CartPage/>} />
       <Route path="/allproduct" element={<AllProduct/>}/>
-      <Route path="/user-dashboard" element={<UserDashboard/>}/>
-      <Route path="/admin-dashboard" element={<AdminDashboard/>}/>
-      <Route path="/addproduct" element={<AddProductPage/>}/>
-      <Route path="/updateproduct" element={<UpdateProductPage/>}/>
+      <Route path="/user-dashboard" element={
+            <ProtectedRouteForUser>
+              <UserDashboard />
+            </ProtectedRouteForUser>
+          } />
+      <Route path="/admin-dashboard" element={
+            <ProtectedRouteForAdmin>
+              <AdminDashboard />
+            </ProtectedRouteForAdmin>
+          } />
+      <Route path="/addproduct" element={
+            <ProtectedRouteForAdmin>
+              <AddProductPage />
+            </ProtectedRouteForAdmin>
+          } />
+      <Route path="/updateproduct/:id" element={
+            <ProtectedRouteForAdmin>
+              <UpdateProductPage />
+            </ProtectedRouteForAdmin>
+          } />
       <Route path="/about" element={<About/>} />
       
       

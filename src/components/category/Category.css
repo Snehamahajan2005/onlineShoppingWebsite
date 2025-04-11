@@ -44,7 +44,7 @@
   }
   
   .category-image-wrapper:hover {
-    background-color: #ec4899; /* Lighter pink on hover */
+    background-color:var(--baseColor); /* Lighter pink on hover */
   }
   
   /* Category images */

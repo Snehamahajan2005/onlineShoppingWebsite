@@ -5,8 +5,17 @@ import './AdminDashboard.css';
 import ProductDetail from "../../../components/admin/productdetail1/ProductDetail";
 import OrderDetail from "../../../components/admin/OrderDetail/OrderDetail";
 import UserDetail from "../../../components/admin/userdetail/UserDetail";
+import Layout from "../../../components/layout/Layout";
+import {  useContext } from 'react';
+import myContext from "../../../context/myContext";
+
 const AdminDashboard = () => {
+    //user
+    const user = JSON.parse(localStorage.getItem('users'));
+    const context = useContext(myContext);
+    const {allProducts} = context;
     return (
+        <Layout>
         <div className="dashboard-container">
             {/* Top Section */}
             <div className="top-section">
@@ -19,8 +28,10 @@ const AdminDashboard = () => {
                     <img src="https://cdn-icons-png.flaticon.com/128/2202/2202112.png" alt="Admin" />
                 </div>
                 <div className="profile-info">
-                    <p><span className="label">Name:</span> Kamal Nayan Upadhyay</p>
-                    <p><span className="label">Email:</span> test@gmail.com</p>
+                    <p><span className="label">Name:</span>{user?.name}</p>
+                    <p><span className="label">Email:</span>  {user?.email}</p>
+                    <p><span className="label">Date:</span>{user?.date}</p>
+                    <p><span className="label">userType:</span>  {user?.userType}</p>
                 </div>
             </div>
 
@@ -43,7 +54,7 @@ const AdminDashboard = () => {
                                         <path d="m15 11-1 9" />
                                     </svg>
                                 </div>
-                                <h2 className="tab-number">10</h2>
+                                <h2 className="tab-number">{allProducts.length}</h2>
                                 <p className="tab-label">Total Products</p>
                             </div>
                         </Tab>
@@ -98,7 +109,9 @@ const AdminDashboard = () => {
                 </Tabs>
             </div>
         </div>
+        </Layout>
     );
+
 };
 
 export default AdminDashboard;
