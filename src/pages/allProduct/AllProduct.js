@@ -1,70 +1,95 @@
 import { useNavigate } from "react-router-dom";
 import Layout from "../../components/layout/Layout";
 import "./AllProduct.css"; // Importing the CSS file
+import { useContext ,  useEffect} from "react";
+import myContext from "../../context/myContext";
+import Loader from "../../components/loader/Loader";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, deleteFromCart } from "../../redux/cartSlice";
+import toast from "react-hot-toast";
 
-// Product data
-const productData = [
-    {
-        id: 1,
-        image: "https://i.pinimg.com/564x/3e/05/ce/3e05cefbc7eec79ac175ea8490a67939.jpg",
-        title: "Hand Painted Blue Kaushalam Tea Pot in Aluminium",
-        price: 150,
-    },
-    {
-        id: 2,
-        image: "https://i.pinimg.com/736x/e4/61/f2/e461f2246b6ad93e2099d98780626396.jpg",
-        title: "Kaushalam kalash Copper Pot",
-        price: 120,
-    },
-    {
-        id: 3,
-        image: "https://i.pinimg.com/564x/fd/50/68/fd50688767adb47aba7204f034554cbd.jpg",
-        title: "Hand Painted Blue Kaushalam Tea Pot in Aluminium",
-        price: 130,
-    },
-    {
-        id: 4,
-        image: "https://i.pinimg.com/564x/22/80/8d/22808d88ada424962f2e064f3075b2d1.jpg",
-        title: "Hand Painted Blue Kaushalam Tea Pot in Aluminium",
-        price: 120,
-    },
-];
 
 const AllProduct = () => {
     const navigate = useNavigate();
+  const context = useContext(myContext);
+  const { loading , allProducts} = context;
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart);
+
+  // Add item to cart
+  const addCart = (item) => {
+    dispatch(addToCart(item));
+    toast.success("Added to cart");
+  };
+
+  // Remove item from cart
+  const deleteCart = (item) => {
+    dispatch(deleteFromCart(item));
+    toast.success("Removed from cart");
+  };
+
+  // Save cart to localStorage
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cartItems));
+  }, [cartItems]);
 
     return (
         <Layout>
             <div className="products-container">
                 {/* Page Heading */}
                 <h1 className="products-heading">All Products</h1>
+                <div className="loader">{loading && <Loader/>} </div>
 
                 {/* Products List */}
                 <section className="products-grid">
-                    {productData.map((product) => (
-                        <div key={product.id} className="product-card">
+                    {allProducts.map((item,index) =>{
+                         const { id, title, price,productImageUrl } = item;
+                    return (
+                        <div key={index} className="product-card">
+                            <div className="product-image-wrapper">
                             <img
-                                src={product.image}
-                                alt={product.title}
+                                src={productImageUrl}
+                                alt={title}
                                 className="product-image"
-                                onClick={() => navigate("/productinfo")}
+                                onClick={() => navigate(`/productinfo/${id}`)}
                             />
+                                </div>
                             <div className="product-info">
                                 <h2 className="product-brand">E-bharat</h2>
                                 <h3 className="product-title">
-                                    {product.title.substring(0, 25)}
+                                    {title.substring(0, 25)}
                                 </h3>
-                                <h3 className="product-price">₹{product.price}</h3>
+                                <h3 className="product-price">₹{price}</h3>
 
-                                <button className="add-to-cart-btn">Add To Cart</button>
+                                {/* Conditional Add/Delete from Cart */}
+                 <div className="button-wrapper">
+                  {cartItems.some((p) => p.id === item.id) ? (
+                    <button
+                      onClick={() => deleteCart(item)}
+                      className="delete-button"
+                    >
+                      Remove From Cart
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => addCart(item)}
+                      className="add-button"
+                    >
+                      Add To Cart
+                    </button>
+                  )}
+                </div>
                             </div>
                         </div>
-                    ))}
+                    )
+                }
+                    )}
                 </section>
             </div>
         </Layout>
     );
 };
+
 
 export default AllProduct;
 

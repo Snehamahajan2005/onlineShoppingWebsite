@@ -1,5 +1,6 @@
 import React from 'react';
 import './Category.css';
+import { useNavigate } from "react-router";
 
 // Category data containing image URLs and names
 const categories = [
@@ -14,6 +15,7 @@ const categories = [
 ];
 
 const Category = () => {
+  const navigate = useNavigate();
   return (
     <div className="category-container">
       {/* Scrollable category list */}
@@ -21,7 +23,7 @@ const Category = () => {
         {categories.map((item, index) => (
           <div key={index} className="category-item">
             {/* Category image inside a circular background */}
-            <div className="category-image-wrapper">
+            <div  onClick={() => navigate(`/category/${item.name}`)} className="category-image-wrapper">
               <img className="category-image" src={item.image} alt={item.name} />
             </div>
             {/* Category name below the image */}

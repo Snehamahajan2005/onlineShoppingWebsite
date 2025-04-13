@@ -1,0 +1,71 @@
+/* BuyNowModal.css */
+
+/* Button Styles */
+.buy-button,
+.submit-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #ec4899;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.buy-button:hover,
+.submit-button:hover {
+    background-color: #fbcfe8;
+    color: #be185d;
+}
+
+/* Modal Overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fff0f6;
+    padding: 20px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+}
+
+/* Close Button */
+.close-button {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #d63384;
+}
+
+/* Input Group */
+.input-group {
+    margin-bottom: 15px;
+}
+
+/* Input Field */
+.input-field {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #f9a8d4;
+    border-radius: 6px;
+    outline: none;
+    color: #be185d;
+    background-color: #fff0f6;
+}

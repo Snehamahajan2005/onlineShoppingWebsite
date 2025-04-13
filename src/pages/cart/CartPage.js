@@ -1,95 +1,140 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../../components/layout/Layout";
 import { FaTrash } from "react-icons/fa";
-import "./CartPage.css"; // Importing the separate CSS file
-
-// Dummy product data
-const products = [
-    {
-        id: 1,
-        name: "Nike Air Force 1 07 LV8",
-        price: "₹47,199",
-        originalPrice: "₹48,900",
-        discount: "5% Off",
-        color: "Orange",
-        size: "8 UK",
-        imageSrc: "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/54a510de-a406-41b2-8d62-7f8c587c9a7e/air-force-1-07-lv8-shoes-9KwrSk.png",
-    },
-    {
-        id: 2,
-        name: "Nike Blazer Low 77 SE",
-        price: "₹1,549",
-        originalPrice: "₹2,499",
-        discount: "38% Off",
-        color: "White",
-        size: "8 UK",
-        imageSrc: "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/e48d6035-bd8a-4747-9fa1-04ea596bb074/blazer-low-77-se-shoes-0w2HHV.png",
-    },
-    {
-        id: 3,
-        name: "Nike Air Max 90",
-        price: "₹2,219",
-        originalPrice: "₹9,999",
-        discount: "78% Off",
-        color: "Black",
-        imageSrc: "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/fd17b420-b388-4c8a-aaaa-e0a98ddf175f/dunk-high-retro-shoe-DdRmMZ.png",
-    },
-];
+import "./CartPage.css";
+import { useDispatch, useSelector } from "react-redux";
+import { decrementQuantity, deleteFromCart, incrementQuantity } from "../../redux/cartSlice";
+import toast from "react-hot-toast";
+import BuyNowModal from "../../components/buyNowModal/BuyNowModal";
+import { ref, push } from "firebase/database";
+import { Navigate } from "react-router"
+import { database } from "../../firebase/firebase"; // using realtime db
 
 const CartPage = () => {
+    const cartItems = useSelector((state) => state.cart);
+    const dispatch = useDispatch();
+
+    const deleteCart = (item) => {
+        dispatch(deleteFromCart(item));
+        toast.success("Deleted from cart");
+    };
+
+    const handleIncrement = (id) => {
+        dispatch(incrementQuantity(id));
+    };
+
+    const handleDecrement = (id) => {
+        dispatch(decrementQuantity(id));
+    };
+
+    const cartItemTotal = cartItems.map(item => item.quantity).reduce((a, b) => a + b, 0);
+    const cartTotal = cartItems.map(item => item.price * item.quantity).reduce((a, b) => a + b, 0);
+
+    useEffect(() => {
+        localStorage.setItem("cart", JSON.stringify(cartItems));
+    }, [cartItems]);
+
+    // Get user
+    const user = JSON.parse(localStorage.getItem("users"));
+
+    // Address Info
+    const [addressInfo, setAddressInfo] = useState({
+        name: "",
+        address: "",
+        pincode: "",
+        mobileNumber: "",
+        date: new Date().toLocaleString("en-US", {
+            month: "short",
+            day: "2-digit",
+            year: "numeric",
+        }),
+    });
+
+    // Buy Now Function
+    const buyNowFunction = () => {
+        // Validation
+        const { name, address, pincode, mobileNumber } = addressInfo;
+        if (!name || !address || !pincode || !mobileNumber) {
+            return toast.error("All fields are required");
+        }
+
+        const orderData = {
+            cartItems,
+            addressInfo,
+            email: user.email,
+            userId: user.uid,
+            status: "confirmed",
+            date: new Date().toLocaleString("en-US", {
+                month: "short",
+                day: "2-digit",
+                year: "numeric",
+            }),
+        };
+
+        try {
+            const orderRef = ref(database , "orders");
+            push(orderRef, orderData);
+            toast.success("Order placed successfully!");
+            setAddressInfo({
+                name: "",
+                address: "",
+                pincode: "",
+                mobileNumber: "",
+            });
+        } catch (error) {
+            console.error("Order submission failed:", error);
+            toast.error("Something went wrong");
+        }
+    };
+
     return (
         <Layout>
             <div className="container">
                 <div className="cart-content">
                     <h1 className="cart-title">Shopping Cart</h1>
                     <form className="cart-form">
-                        {/* Cart Items Section */}
+                        {/* Cart Items */}
                         <section className="cart-items">
-                            <h2 className="sr-only">Items in your shopping cart</h2>
                             <ul className="cart-list">
-                                {products.map((product) => (
-                                    <li key={product.id} className="cart-item">
-                                        {/* Product Image */}
-                                        <img src={product.imageSrc} alt={product.name} className="product-image" />
-                                        
-                                        {/* Product Details */}
-                                        <div className="product-info">
-                                            <h3>
-                                                <a href="#" className="product-name">{product.name}</a>
-                                            </h3>
-                                            <p className="product-details">{product.color} | Size: {product.size}</p>
-                                            <div className="product-pricing">
-                                                <p className="original-price">{product.originalPrice}</p>
-                                                <p className="discounted-price">{product.price}</p>
-                                                <p className="discount">{product.discount}</p>
-                                            </div>
-                                        </div>
-
-                                        {/* Quantity and Remove Button */}
-                                        <div className="product-actions">
-                                            <button className="quantity-btn">-</button>
-                                            <input type="text" defaultValue={1} className="quantity-input" />
-                                            <button className="quantity-btn">+</button>
-                                            <button className="remove-btn">
-                                                <FaTrash className="trash-icon" /> Remove
-                                            </button>
-                                        </div>
-                                    </li>
-                                ))}
+                                {cartItems.length > 0 ? (
+                                    <>
+                                        {cartItems.map((item, index) => {
+                                            const { id, title, price, productImageUrl, quantity, category } = item;
+                                            return (
+                                                <li key={index} className="cart-item">
+                                                    <img src={productImageUrl} alt="img" className="product-image" />
+                                                    <div className="product-info">
+                                                        <h3 className="product-name">{title}</h3>
+                                                        <p className="product-details">{category}</p>
+                                                        <div className="product-pricing">
+                                                            <p className="original-price">₹{price}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div className="product-actions">
+                                                        <button onClick={() => handleDecrement(id)} className="quantity-btn">-</button>
+                                                        <input type="text" value={quantity} readOnly className="quantity-input" />
+                                                        <button onClick={() => handleIncrement(id)} className="quantity-btn">+</button>
+                                                        <button onClick={() => deleteCart(item)} className="remove-btn">
+                                                            <FaTrash className="trash-icon" /> Remove
+                                                        </button>
+                                                    </div>
+                                                </li>
+                                            );
+                                        })}
+                                    </>
+                                ) : (
+                                    <h1>Not found</h1>
+                                )}
                             </ul>
                         </section>
 
-                        {/* Order Summary Section */}
-                        <section className="order-summary">
+                        {/* Order Summary */}
+                        <section className="rder-summary">
                             <h2 className="summary-title">Price Details</h2>
                             <div className="summary-content">
                                 <div className="summary-row">
-                                    <span>Price (3 items)</span>
-                                    <span>₹52,398</span>
-                                </div>
-                                <div className="summary-row">
-                                    <span>Discount</span>
-                                    <span className="free">- ₹3,431</span>
+                                    <span>Price ({cartItemTotal} items)</span>
+                                    <span>₹{cartTotal}</span>
                                 </div>
                                 <div className="summary-row">
                                     <span>Delivery Charges</span>
@@ -97,10 +142,19 @@ const CartPage = () => {
                                 </div>
                                 <div className="summary-total">
                                     <span>Total Amount</span>
-                                    <span>₹48,967</span>
+                                    <span>₹{cartTotal}</span>
                                 </div>
                             </div>
-                            <button className="buy-now-btn">Buy Now</button>
+
+                            {/* Buy Now Modal */}
+                            {user ?
+                                <BuyNowModal
+                                    addressInfo={addressInfo}
+                                    setAddressInfo={setAddressInfo}
+                                    buyNowFunction={buyNowFunction}
+                                />
+                            :
+                            <Navigate to={'/LoginPage'} />}
                         </section>
                     </form>
                 </div>

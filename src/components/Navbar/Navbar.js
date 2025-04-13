@@ -6,22 +6,19 @@ import "./Navbar.css";
 import logo from "../../assests/images/logo.jpg";
 import COLOR from "../../config/color";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useContext } from "react";
+import myContext from "../../context/myContext";
+
 //import SearchBar from "../../components/searchBar/SearchBar";
 //import { path } from 'framer-motion/client';
 
-// Combined search data with image
-const searchData = [
-  { name: 'Fashion', image: 'https://i.pinimg.com/564x/3e/05/ce/3e05cefbc7eec79ac175ea8490a67939.jpg' },
-  { name: 'Shirt', image: 'https://i.pinimg.com/736x/e4/61/f2/e461f2246b6ad93e2099d98780626396.jpg' },
-  { name: 'Jacket', image: 'https://i.pinimg.com/564x/fd/50/68/fd50688767adb47aba7204f034554cbd.jpg' },
-  { name: 'Mobile', image: 'https://i.pinimg.com/564x/22/80/8d/22808d88ada424962f2e064f3075b2d1.jpg' },
-  { name: 'Laptop', image: 'https://i.pinimg.com/564x/3e/05/ce/3e05cefbc7eec79ac175ea8490a67939.jpg' },
-  { name: 'Home', image: 'https://i.pinimg.com/736x/e4/61/f2/e461f2246b6ad93e2099d98780626396.jpg' },
-  { name: 'Book', image: 'https://i.pinimg.com/564x/fd/50/68/fd50688767adb47aba7204f034554cbd.jpg' },
-];
 
 function Navbar() {
   const navigate = useNavigate();
+  const context = useContext(myContext);
+  const { allProducts } = context;
+
   // Get user from localStorage
   const user = JSON.parse(localStorage.getItem("users"));
   const userType = user?.userType; 
@@ -31,6 +28,9 @@ function Navbar() {
     localStorage.removeItem("users");
     navigate("/LoginPage");
   };
+   // CartItems
+   const cartItems = useSelector((state) => state.cart);
+
   const links = [
     { title: "Home", path: "/home" },
     { title: "All Products", path: "/allproduct" },
@@ -38,7 +38,7 @@ function Navbar() {
     { title: "Login", path: "/LoginPage", auth: "guest" },
     { title: "User", path: "/user-dashboard", userType: "Customer" },
     { title: "Admin", path: "/admin-dashboard", userType: "Admin" },
-    { title: "Cart(0)", path:"/cart" },
+    { title:  <span>Cart ({cartItems.length})</span>, path:"/cart" },
     { title: "About Us", path: "/about" },
   ];
 
@@ -50,17 +50,18 @@ function Navbar() {
   const handleSearchChange = (e) => {
     const value = e.target.value;
     setSearchTerm(value);
-
+  
     const results = items.filter(item =>
-      item.title.toLowerCase().includes(value.toLowerCase())
+      typeof item.title === "string" && item.title.toLowerCase().includes(value.toLowerCase())
     );
     setFilteredResults(results);
   };
+  
 
-  const filterSearchData = searchData.filter(obj =>
-    obj.name.toLowerCase().includes(searchTerm.toLowerCase())
+  const filterSearchData =allProducts.filter(obj =>
+    obj.title.toLowerCase().includes(searchTerm.toLowerCase())
   ).slice(0, 8);
-
+  
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     if (filteredResults.length > 0) {
@@ -104,32 +105,48 @@ function Navbar() {
     </div>
       {/* Integrated Search Bar */}
       <div className="NavbarSearchContanier">
-        <form className="search-bar" onSubmit={handleSearchSubmit}>
-          <input
-            type="text"
-            placeholder="Search..."
-            value={searchTerm}
-            onChange={handleSearchChange}
-          />
-          <button type="submit"><FaSearch /></button>
-        </form>
+  <form className="search-bar" onSubmit={handleSearchSubmit}>
+    <input
+      type="text"
+      placeholder="Search..."
+      value={searchTerm}
+      onChange={handleSearchChange}
+    />
+    <button type="submit"><FaSearch /></button>
+  </form>
 
-        {(searchTerm && (filterSearchData.length > 0 || filteredResults.length > 0)) && (
-          <ul className="search-results">
-            {filterSearchData.map((item, index) => (
-              <li key={index} onClick={() => navigate(`/product/${item.name.toLowerCase()}`)}>
-                <img src={item.image} alt={item.name} className="search-thumb" />
-                {item.name}
-              </li>
-            ))}
-            {filteredResults.map((item) => (
-              <li key={item.id} onClick={() => navigate(item.path)}>
-                🔗 {item.title}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+  {searchTerm && (
+    <ul className="search-results">
+      {/* Product Title Filtered Results */}
+      {filterSearchData.map((item, index) => (
+        <li key={index} onClick={() => navigate(`/productinfo/${item.id}`)}>
+          <img src={item.productImageUrl} alt={item.title} className="search-thumb" />
+          {item.title}
+        </li>
+      ))}
+
+      {/* Route Link Filtered Results */}
+      {filteredResults.map((item, index) => (
+        <li key={index} onClick={() => navigate(item.path)}>
+          🔗 {item.title}
+        </li>
+      ))}
+
+      {/* If no results */}
+      {filterSearchData.length === 0 && filteredResults.length === 0 && (
+        <li className="no-results">
+          <img
+            src="https://cdn-icons-png.flaticon.com/128/10437/10437090.png"
+            alt="No results"
+            className="search-thumb"
+          />
+          No results found
+        </li>
+      )}
+    </ul>
+  )}
+</div>
+
       <div className="NavbarProfileContainer">
         <FaCircleUser size={40} color={COLOR.whiteColor} />
       </div>

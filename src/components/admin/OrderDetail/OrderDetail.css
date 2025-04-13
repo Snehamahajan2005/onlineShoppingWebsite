@@ -1,65 +1,79 @@
-/* Main container for the OrderDetail component */
+/* OrderDetail.css */
+
+/* Container for the whole order detail page */
 .order-container {
-    padding: 20px;
-  }
-  
-  /* Header section */
-  .order-header {
-    padding-bottom: 20px;
-  }
-  
-  /* Title style */
-  .order-title {
-    font-size: 20px;
-    font-weight: bold;
-    color: #f472b6; /* pink-300 */
-  }
-  
-  /* Wrapper to make table scrollable horizontally on small screens */
-  .table-wrapper {
-    width: 100%;
-    overflow-x: auto;
-  }
-  
-  /* Base table styles */
-  .order-table {
-    width: 100%;
-    border-collapse: collapse;
-    color: #ec4899; /* pink-400 */
-  }
-  
-  /* Table header cells */
-  .table-head {
-    background-color: #f1f5f9; /* slate-100 */
-    color: #334155; /* slate-700 */
-    font-weight: bold;
-    padding: 12px 16px;
-    border: 1px solid #ffeef0; /* pink-100 */
-    text-align: left;
-  }
-  
-  /* Table body cells */
-  .table-data {
-    padding: 12px 16px;
-    border: 1px solid #ffeef0;
-    color: #64748b; /* slate-500 */
-    text-transform: capitalize;
-  }
-  
-  /* Action buttons */
-  .table-action {
-    padding: 12px 16px;
-    border: 1px solid #ffeef0;
-    cursor: pointer;
-  }
-  
-  /* Edit action color */
-  .edit {
-    color: #22c55e; /* green-500 */
-  }
-  
-  /* Delete action color */
-  .delete {
-    color: #ef4444; /* red-500 */
-  }
-  
+  padding: 20px;
+  background-color: #fdf9fa;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Header section */
+.order-header {
+  margin-bottom: 20px;
+}
+
+.order-title {
+  font-size: 24px;
+  color: #d63384; /* soft pink */
+  font-weight: bold;
+}
+
+/* Table wrapper to handle overflow */
+.table-wrapper {
+  overflow-x: auto;
+}
+
+/* Table styles */
+.order-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 1000px;
+}
+
+/* Table header */
+.table-head {
+  background-color: #ffe4f0;
+  color: #333;
+  font-weight: bold;
+  padding: 12px;
+  border: 1px solid #f4c2d7;
+  text-align: left;
+}
+
+/* Table data cells */
+.table-data {
+  padding: 10px;
+  border: 1px solid #f4c2d7;
+  color: #444;
+  vertical-align: middle;
+}
+
+/* Product image */
+.product-img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+/* Status column styling */
+.table-data.status {
+  color: green;
+  font-weight: 600;
+}
+
+/* Action buttons */
+.table-action {
+  cursor: pointer;
+  font-weight: 600;
+  text-align: center;
+}
+
+.table-action.delete {
+  color: #e63946;
+  transition: color 0.3s;
+}
+
+.table-action.delete:hover {
+  color: #b21e35;
+}

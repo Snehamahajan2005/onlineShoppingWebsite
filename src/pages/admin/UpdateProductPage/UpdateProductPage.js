@@ -29,6 +29,7 @@ const UpdateProductPage = () => {
     productImageUrl: '',
     category: '',
     description: '',
+    quantity: '',
     date: new Date().toLocaleString('en-US', {
       month: 'short',
       day: '2-digit',

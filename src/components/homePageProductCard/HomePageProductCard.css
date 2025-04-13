@@ -80,3 +80,13 @@
     display :flex;
     justify-content: center;
   }
+  /* Delete Button Style */
+.card-button.delete {
+  background-color: #dc2626;
+  color:white;
+}
+
+.card-button.delete:hover {
+  background-color: #b91c1c;
+  color:white;
+}

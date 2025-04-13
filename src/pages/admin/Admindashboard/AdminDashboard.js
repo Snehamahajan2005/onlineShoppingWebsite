@@ -13,7 +13,7 @@ const AdminDashboard = () => {
     //user
     const user = JSON.parse(localStorage.getItem('users'));
     const context = useContext(myContext);
-    const {allProducts} = context;
+    const {allProducts, allOrders ,allUsers} = context;
     return (
         <Layout>
         <div className="dashboard-container">
@@ -73,7 +73,7 @@ const AdminDashboard = () => {
                                         <path d="M6 18H4c0-1 2-2 2-3s-1-1.5-2-1" />
                                     </svg>
                                 </div>
-                                <h2 className="tab-number">10</h2>
+                                <h2 className="tab-number">{allOrders.length}</h2>
                                 <p className="tab-label">Total Orders</p>
                             </div>
                         </Tab>
@@ -90,7 +90,7 @@ const AdminDashboard = () => {
                                         <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                                     </svg>
                                 </div>
-                                <h2 className="tab-number">10</h2>
+                                <h2 className="tab-number">{allUsers.length}</h2>
                                 <p className="tab-label">Total Users</p>
                             </div>
                         </Tab>
