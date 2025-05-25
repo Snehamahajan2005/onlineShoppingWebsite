@@ -70,7 +70,7 @@ const ProductInfo = () => {
                                 <img
                                     src={product?.productImageUrl}
                                     alt={product?.title}
-                                    className="product-img"
+                                    className="product-img-product"
                                 />
                             </div>
                             <div className="product-details">

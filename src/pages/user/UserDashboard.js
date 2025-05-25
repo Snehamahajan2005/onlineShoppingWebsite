@@ -73,7 +73,8 @@ const UserDashboard = () => {
                 <div className="info-item">
                   <span className="info-label">Date</span>
                   <span className="info-value">
-                    {orders.cartItems[0]?.date}
+                  {orders.date}
+
                   </span>
                 </div>
                 <div className="info-item">

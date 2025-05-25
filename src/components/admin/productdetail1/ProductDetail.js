@@ -68,7 +68,7 @@ const ProductDetail = () => {
               <tr key={item.id}>
                 <td>{index + 1}.</td>
                 <td>
-                  <img src={item.productImageUrl} alt="product" className="product-image" />
+                  <img src={item.productImageUrl} alt="product" className="product-image-admin" />
                 </td>
                 <td>{item.title}</td>
                 <td>₹{item.price}</td>

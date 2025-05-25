@@ -22,6 +22,7 @@ function Navbar() {
   // Get user from localStorage
   const user = JSON.parse(localStorage.getItem("users"));
   const userType = user?.userType; 
+  const userName=user?.name;
 
   // Logout function
   const logout = () => {
@@ -148,7 +149,7 @@ function Navbar() {
 </div>
 
       <div className="NavbarProfileContainer">
-        <FaCircleUser size={40} color={COLOR.whiteColor} />
+        <h2>Hi {userName}</h2>
       </div>
       
     </div>

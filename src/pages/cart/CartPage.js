@@ -36,10 +36,11 @@ const CartPage = () => {
 
     // Get user
     const user = JSON.parse(localStorage.getItem("users"));
+    
 
     // Address Info
     const [addressInfo, setAddressInfo] = useState({
-        name: "",
+        name: user?.name|| "",
         address: "",
         pincode: "",
         mobileNumber: "",
@@ -102,7 +103,7 @@ const CartPage = () => {
                                             const { id, title, price, productImageUrl, quantity, category } = item;
                                             return (
                                                 <li key={index} className="cart-item">
-                                                    <img src={productImageUrl} alt="img" className="product-image" />
+                                                    <img src={productImageUrl} alt="img" className="product-image-cart" />
                                                     <div className="product-info">
                                                         <h3 className="product-name">{title}</h3>
                                                         <p className="product-details">{category}</p>

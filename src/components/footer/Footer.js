@@ -35,10 +35,10 @@ const Footer = () => {
           <a className="footer-icon" href="#">
             <FaTwitter />
           </a>
-          <a className="footer-icon" href="#">
+          <a className="footer-icon" target="_blank" href="https://www.instagram.com/u_n_k_n_o_w_n_2_0?igsh=Mmt3aHc2dWhybWs4">
             <FaInstagram />
           </a>
-          <a className="footer-icon" href="#">
+          <a className="footer-icon" target="_blank" href="https://www.linkedin.com/in/sneha-mahajan-9947a4348?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">
             <FaLinkedinIn />
           </a>
         </span>
